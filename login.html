@@ -1,0 +1,149 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Management System</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* ADD CSS FOR THE LOGIN PAGE */
+    #login-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f1f1f1;
+    }
+
+    #login-form {
+      width: 440px;
+      height: 440px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    #login-form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 48px;
+    }
+
+    #login-form input {
+      display: block;
+      width: 99%;
+      padding: 10px;
+      border: 2px solid #ddd;
+      margin-bottom: 30px;
+      margin-top: 35px;
+    }
+
+    #login-form button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #0F4C81;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 31px;
+      margin-bottom: 50px;
+      height: 45px;
+    }
+
+    #login-form button:hover {
+      opacity: 0.9;
+    }
+
+    #login-form p {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    #login-form p a {
+      color: #0F4C81;
+      text-decoration: none;
+    }
+
+    #login-form p a:hover {
+      text-decoration: underline;
+    }
+
+    /* ADD CSS FOR THE TEXT ABOVE AND BELOW THE LOGIN FORM */
+    #welcome-text {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    #developer-text {
+      text-align: center;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    /* ADD CSS TO CHANGE THE POSITION OF THE TEXT */
+    #login-page {
+      flex-direction: column;
+      /* CHANGE THE FLEX DIRECTION TO COLUMN */
+    }
+
+    #login-form {
+      order: 2;
+      /* SET THE ORDER OF THE LOGIN FORM TO 2 */
+    }
+
+    #welcome-text {
+      order: 1;
+      /* SET THE ORDER OF THE WELCOME TEXT TO 1 */
+    }
+
+    #developer-text {
+      order: 3;
+      /* SET THE ORDER OF THE DEVELOPER TEXT TO 3 */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="content">
+    <!-- ADD HTML FOR THE LOGIN PAGE -->
+    <div id="login-page">
+      <!-- ADD HTML FOR THE TEXT ABOVE THE LOGIN FORM -->
+      <div id="welcome-text">Welcome Back !</div>
+      <form id="login-form" action="/action_page.php" method="post">
+        <h2>Login</h2>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <!-- ADD AN ONCLICK EVENT TO THE BUTTON TO REDIRECT TO HOME.HTML ONLY IF USERNAME AND PASSWORD ARE NOT EMPTY -->
+        <button type="submit" onclick="checkLogin()">Login</button>
+        <p>Don't have an account? <a href="#">Sign up</a></p>
+      </form>
+      <!-- ADD HTML FOR THE TEXT BELOW THE LOGIN FORM -->
+      <div id="developer-text">Developed by Evlent</div>
+    </div>
+  </div>
+  <!-- ADD JAVASCRIPT CODE TO CHECK THE USERNAME AND PASSWORD AND REDIRECT TO HOME.HTML -->
+  <script>
+    // DEFINE A FUNCTION TO CHECK THE USERNAME AND PASSWORD
+    function checkLogin() {
+      // GET THE USERNAME AND PASSWORD VALUES FROM THE INPUT FIELDS
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      // CHECK IF THE USERNAME AND PASSWORD ARE NOT EMPTY
+      if (username && password) {
+        // REDIRECT TO HOME.HTML
+        window.location.href = "file:///Users/vedangvaidya/Desktop/POS/home.html";
+      }
+    }
+  </script>
+</body>
+
+</html>

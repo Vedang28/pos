@@ -1,0 +1,610 @@
+<html>
+
+<head>
+  <style>
+    /* Use Montserrat font */
+    @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+    * {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Use black and white scheme */
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+    }
+
+    /* Style the top bar */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 50px;
+      background-color: #191C27;
+      border-radius: 5px;
+    }
+
+    /* Style the profile button */
+    .profile-button {
+      margin-right: 25px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background-image: url('profile-avatar.png');
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+    }
+
+    /* Style the navigation links */
+    .nav-link {
+      margin-left: 78px;
+      padding: 10px;
+      font-size: 18px;
+      text-decoration: none;
+      color: #FFFFFF;
+      cursor: pointer;
+    }
+
+    /* Change the color and the underline of the active link */
+    .active {
+      color: #92C7CF;
+      border-bottom: 2px solid #92C7CF;
+    }
+
+    /* Style the content area */
+    .content {
+      margin-top: 20px;
+      padding: 20px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    /* Style the drop down menu */
+    .drop-down-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 25px;
+      width: 150px;
+      background-color: #191C27;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style the drop down menu items */
+    .drop-down-menu-item {
+      display: block;
+      padding: 10px;
+      font-size: 16px;
+      text-decoration: none;
+      color: #FFFFFF;
+      cursor: pointer;
+    }
+
+    /* Change the color of the drop down menu items on hover */
+    .drop-down-menu-item:hover {
+      color: #92C7CF;
+    }
+
+    /* Style the new invoice button */
+    .new-invoice-button {
+      display: block;
+      margin: auto;
+      margin-bottom: 20px;
+      width: 150px;
+      height: 40px;
+      background-color: #92C7CF;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 30px;
+      margin-bottom: 85px;
+    }
+
+    /* Style the previous invoices div */
+    .previous-invoices-div {
+      width: 80%;
+      height: 300px;
+      margin: auto;
+      background-color: #191C27;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      overflow-y: scroll;
+    }
+
+    /* Style the previous invoices label */
+    .previous-invoices-label {
+      display:flex;
+      margin-right: 500px;
+      padding: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Create the top bar -->
+  <div class="top-bar">
+    <!-- Create the navigation links -->
+    <div>
+      <a class="nav-link active" id="dashboard-link">Dashboard</a>
+      <a class="nav-link" id="purchase-link">Purchase</a>
+      <a class="nav-link" id="inventory-link">Inventory</a>
+      <a class="nav-link" id="sales-link">Sales</a>
+      <a class="nav-link" id="invoices-link">Invoices</a>
+      <a class="nav-link" id="ledger-link">Ledger</a>
+    </div>
+    <!-- Create the profile button -->
+    <button class="profile-button" id="profile-button"></button>
+    <!-- Create the drop down menu -->
+    <div class="drop-down-menu" id="drop-down-menu">
+      <!-- Create the drop down menu items -->
+      <a class="drop-down-menu-item" id="my-profile-link">My Profile</a>
+      <a class="drop-down-menu-item" id="settings-link">Settings</a>
+      <a class="drop-down-menu-item" id="help-link">Help</a>
+      <a class="drop-down-menu-item" id="log-out-link">Log Out</a>
+    </div>
+  </div>
+  <!-- Create the content area -->
+  <div class="content" id="content">
+    Welcome to Dashboard
+    This is where your content will be displayed.
+  </div>
+
+
+  <script>
+    // Get the profile button and the drop down menu
+    var profileButton = document.getElementById("profile-button");
+    var dropDownMenu = document.getElementById("drop-down-menu");
+
+    // Add a click event listener to the profile button
+    profileButton.addEventListener("click", function () {
+      // Toggle the display of the drop down menu
+      if (dropDownMenu.style.display === "none") {
+        dropDownMenu.style.display = "block";
+      } else {
+        dropDownMenu.style.display = "none";
+      }
+    });
+
+    // Get the log out link
+    var logOutLink = document.getElementById("log-out-link");
+
+    // Add a click event listener to the log out link
+    logOutLink.addEventListener("click", function () {
+      // Redirect the website to the login page
+      window.location.href = "login.html";
+    });
+
+    // Add your code for the other elements and functionalities here
+
+    // Get the navigation links
+    var dashboardLink = document.getElementById("dashboard-link");
+    var purchaseLink = document.getElementById("purchase-link");
+    var inventoryLink = document.getElementById("inventory-link");
+    var salesLink = document.getElementById("sales-link");
+    var invoicesLink = document.getElementById("invoices-link");
+    var ledgerLink = document.getElementById("ledger-link");
+    // Get the content area
+    var content = document.getElementById("content");
+
+    // Define a function to change the active link and the content
+    function changeActiveLinkAndContent(link, text) {
+      // Remove the active class from all the links
+      dashboardLink.classList.remove("active");
+      purchaseLink.classList.remove("active");
+      inventoryLink.classList.remove("active");
+      salesLink.classList.remove("active");
+      invoicesLink.classList.remove("active");
+      ledgerLink.classList.remove("active");
+      // Add the active class to the clicked link
+      link.classList.add("active");
+
+      // Change the content text
+      content.innerHTML = text;
+    }
+
+    // Add event listeners to the links
+    dashboardLink.addEventListener("click", function () {
+      changeActiveLinkAndContent(dashboardLink, "Welcome to Dashboard<br>This is where your content will be displayed.");
+    });
+
+    purchaseLink.addEventListener("click", function () {
+      // Change the active link and the content
+      changeActiveLinkAndContent(purchaseLink, "");
+
+      // Get the content element
+      var content = document.getElementById("content");
+
+      // Create a div to hold the buttons
+      var buttonDiv = document.createElement("div");
+      buttonDiv.style.display = "flex";
+      buttonDiv.style.justifyContent = "space-evenly";
+      buttonDiv.style.marginBottom = "40px";
+      buttonDiv.style.marginTop = "20px";
+      buttonDiv.style.marginLeft = "0.1px";
+      buttonDiv.style.marginRight = "90px";
+
+      // Create the buttons
+      var newEntryButton = document.createElement("button");
+      newEntryButton.textContent = "New Entry";
+      newEntryButton.style.width = "100px";
+      newEntryButton.style.height = "40px";
+      newEntryButton.style.backgroundColor = "#92C7CF";
+      newEntryButton.style.color = "#FFFFFF";
+      newEntryButton.style.border = "none";
+      newEntryButton.style.borderRadius = "5px";
+      newEntryButton.style.cursor = "pointer";
+
+      var importCsvButton = document.createElement("button");
+      importCsvButton.textContent = "Import CSV";
+      importCsvButton.style.width = "100px";
+      importCsvButton.style.height = "40px";
+      importCsvButton.style.backgroundColor = "#92C7CF";
+      importCsvButton.style.color = "#FFFFFF";
+      importCsvButton.style.border = "none";
+      importCsvButton.style.borderRadius = "5px";
+      importCsvButton.style.cursor = "pointer";
+
+      var scanBarcodeButton = document.createElement("button");
+      scanBarcodeButton.textContent = "Scan Barcode";
+      scanBarcodeButton.style.width = "100px";
+      scanBarcodeButton.style.height = "40px";
+      scanBarcodeButton.style.backgroundColor = "#92C7CF";
+      scanBarcodeButton.style.color = "#FFFFFF";
+      scanBarcodeButton.style.border = "none";
+      scanBarcodeButton.style.borderRadius = "5px";
+      scanBarcodeButton.style.cursor = "pointer";
+
+      // Append the buttons to the button div
+      buttonDiv.appendChild(newEntryButton);
+      buttonDiv.appendChild(importCsvButton);
+      buttonDiv.appendChild(scanBarcodeButton);
+
+      // Create a table to hold the product data
+      var table = document.createElement("table");
+      table.style.width = "80%";
+      table.style.margin = "auto";
+      table.style.borderCollapse = "collapse";
+
+      // Create the table header
+      var tableHeader = document.createElement("tr");
+      tableHeader.style.backgroundColor = "#191C27";
+      tableHeader.style.color = "#FFFFFF";
+
+      // Create the table header cells
+      var productIdHeader = document.createElement("th");
+      productIdHeader.textContent = "Product ID";
+      productIdHeader.style.padding = "10px";
+      productIdHeader.style.border = "1px solid #FFFFFF";
+
+      var productNameHeader = document.createElement("th");
+      productNameHeader.textContent = "Product Name";
+      productNameHeader.style.padding = "10px";
+      productNameHeader.style.border = "1px solid #FFFFFF";
+
+      var productDescriptionHeader = document.createElement("th");
+      productDescriptionHeader.textContent = "Product Supplier";
+      productDescriptionHeader.style.padding = "10px";
+      productDescriptionHeader.style.border = "1px solid #FFFFFF";
+
+      // Append the table header cells to the table header
+      tableHeader.appendChild(productIdHeader);
+      tableHeader.appendChild(productNameHeader);
+      tableHeader.appendChild(productDescriptionHeader);
+
+      // Append the table header to the table
+      table.appendChild(tableHeader);
+
+      // Append the button div and the table to the content
+      content.appendChild(buttonDiv);
+      content.appendChild(table);
+
+      // Define a function to create a new editable row
+      function createNewRow() {
+        // Create a new table row
+        var newRow = document.createElement("tr");
+
+        // Create three table cells
+        var productIdCell = document.createElement("td");
+        var productNameCell = document.createElement("td");
+        var productDescriptionCell = document.createElement("td");
+
+        // Create three input elements
+        var productIdInput = document.createElement("input");
+        var productNameInput = document.createElement("input");
+        var productDescriptionInput = document.createElement("input");
+
+        // Set the input attributes
+        productIdInput.type = "text";
+        productIdInput.placeholder = "Enter product ID";
+        productIdInput.style.width = "100%";
+
+        productNameInput.type = "text";
+        productNameInput.placeholder = "Enter product name";
+        productNameInput.style.width = "100%";
+
+        productDescriptionInput.type = "text";
+        productDescriptionInput.placeholder = "Enter product description";
+        productDescriptionInput.style.width = "100%";
+
+        // Append the input elements to the table cells
+        productIdCell.appendChild(productIdInput);
+        productNameCell.appendChild(productNameInput);
+        productDescriptionCell.appendChild(productDescriptionInput);
+
+        // Append the table cells to the new row
+        newRow.appendChild(productIdCell);
+        newRow.appendChild(productNameCell);
+        newRow.appendChild(productDescriptionCell);
+
+        // Return the new row
+        return newRow;
+      }
+
+      // Define a function to import CSV file
+      function importCsvFile() {
+        // Create a file input element
+        var fileInput = document.createElement("input");
+
+        // Set the file input attributes
+        fileInput.type = "file";
+        fileInput.accept = ".csv";
+        fileInput.style.display = "none";
+
+        // Add a change event listener to the file input
+        fileInput.addEventListener("change", function () {
+          // Get the selected file
+          var file = fileInput.files[0];
+
+          // Check if the file is a CSV file
+          if (file.type === "text/csv") {
+            // Create a file reader object
+            var reader = new FileReader();
+
+            // Add a load event listener to the reader
+            reader.addEventListener("load", function () {
+              // Get the file content as a string
+              var csv = reader.result;
+
+              // Split the csv by line breaks
+              var lines = csv.split("\n");
+
+              // Loop through the lines
+              for (var i = 0; i < lines.length; i++) {
+                // Skip the header line
+                if (i === 0) continue;
+
+                // Split the line by commas
+                var values = lines[i].split(",");
+
+                // Check if the line has three values
+                if (values.length === 3) {
+                  // Get the values
+                  var productId = values[0];
+                  var productName = values[1];
+                  var productDescription = values[2];
+
+                  // Create a new row
+                  var newRow = createNewRow();
+
+                  // Get the input elements in the new row
+                  var inputs = newRow.getElementsByTagName("input");
+
+                  // Set the input values
+                  inputs[0].value = productId;
+                  inputs[1].value = productName;
+                  inputs[2].value = productDescription;
+
+                  // Append the new row to the table
+                  table.appendChild(newRow);
+                }
+              }
+            });
+
+            // Read the file as a text
+            reader.readAsText(file);
+          } else {
+            // Alert the user that the file is not a CSV file
+            alert("Please select a CSV file.");
+          }
+        });
+
+        // Append the file input to the document body
+        document.body.appendChild(fileInput);
+
+        // Trigger a click event on the file input
+        fileInput.click();
+      }
+
+      // Define a function to scan barcode
+      function scanBarcode() {
+        // Create a video element
+        var video = document.createElement("video");
+
+        // Set the video attributes
+        video.width = 300;
+        video.height = 300;
+        video.style.display = "block";
+        video.style.margin = "auto";
+
+        // Create a canvas element
+        var canvas = document.createElement("canvas");
+
+        // Set the canvas attributes
+        canvas.width = 300;
+        canvas.height = 300;
+        canvas.style.display = "none";
+
+        // Get the canvas context
+        var context = canvas.getContext("2d");
+
+        // Create a script element to load the QuaggaJS library
+        var script = document.createElement("script");
+
+        // Set the script source
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js";
+
+        // Add a load event listener to the script
+        script.addEventListener("load", function () {
+          // Check if the browser supports media devices
+          if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Request the user's permission to access the webcam
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+              // Set the video source to the stream
+              video.srcObject = stream;
+
+              // Play the video
+              video.play();
+
+              // Add a loadedmetadata event listener to the video
+              video.addEventListener("loadedmetadata", function () {
+                // Initialize the QuaggaJS library
+                Quagga.init({
+                  inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: video // Pass the video element as the target
+                  },
+                  decoder: {
+                    readers: ["code_128_reader"] // Specify the barcode format
+                  }
+                }, function (err) {
+                  // Check if there is an error
+                  if (err) {
+                    // Log the error
+                    console.error(err);
+                  } else {
+                    // Start the barcode scanning
+                    Quagga.start();
+                  }
+                });
+
+                // Add a detected event listener to the QuaggaJS library
+                Quagga.onDetected(function (result) {
+                  // Get the barcode data
+                  var barcode = result.codeResult.code;
+
+                  // Stop the barcode scanning
+                  Quagga.stop();
+
+                  // Stop the video stream
+                  stream.getTracks().forEach(function (track) {
+                    track.stop();
+                  });
+
+                  // Remove the video element from the document body
+                  document.body.removeChild(video);
+
+                  // Create a new row
+                  var newRow = createNewRow();
+
+                  // Get the input elements in the new row
+                  var inputs = newRow.getElementsByTagName("input");
+
+                  // Set the first input value to the barcode
+                  inputs[0].value = barcode;
+
+                  // Append the new row to the table
+                  table.appendChild(newRow);
+                });
+              });
+            });
+          } else {
+            // Alert the user that the browser does not support media devices
+            alert("Your browser does not support media devices.");
+          }
+        });
+
+        // Append the script element to the document head
+        document.head.appendChild(script);
+
+        // Append the video element to the document body
+        document.body.appendChild(video);
+      }
+
+      // Add event listeners to the buttons
+      newEntryButton.addEventListener("click", function () {
+        // Create a new row
+        var newRow = createNewRow();
+
+        // Append the new row to the table
+        table.appendChild(newRow);
+      });
+
+      importCsvButton.addEventListener("click", function () {
+        // Import CSV file
+        importCsvFile();
+      });
+
+      scanBarcodeButton.addEventListener("click", function () {
+        // Scan barcode
+        scanBarcode();
+      });
+
+    });
+
+    inventoryLink.addEventListener("click", function () {
+      changeActiveLinkAndContent(inventoryLink, "Welcome to Inventory<br>This is where your content will be displayed.");
+    });
+
+    salesLink.addEventListener("click", function () {
+      changeActiveLinkAndContent(salesLink, "Welcome to Sales<br>This is where your content will be displayed.");
+    });
+
+    invoicesLink.addEventListener("click", function() {
+      // Change the active link and the content
+      changeActiveLinkAndContent(invoicesLink, "");
+
+      // Get the content element
+      var content = document.getElementById("content");
+
+      // Create a button to create a new invoice
+      var newInvoiceButton = document.createElement("button");
+      newInvoiceButton.textContent = "New Invoice";
+      newInvoiceButton.className = "new-invoice-button";
+
+      // Create a div to hold the previous invoices
+      var previousInvoicesDiv = document.createElement("div");
+      previousInvoicesDiv.className = "previous-invoices-div";
+
+      // Create a label for the previous invoices
+      var previousInvoicesLabel = document.createElement("span");
+      previousInvoicesLabel.textContent = "Previous Invoices";
+      previousInvoicesLabel.className = "previous-invoices-label";
+
+      // Append the label to the div
+      previousInvoicesDiv.appendChild(previousInvoicesLabel);
+
+      // Append the button and the div to the content
+      content.appendChild(newInvoiceButton);
+      content.appendChild(previousInvoicesDiv);
+    });
+
+
+    ledgerLink.addEventListener("click", function () {
+      changeActiveLinkAndContent(ledgerLink, "Welcome to Ledger<br>This is where your content will be displayed.");
+    });
+
+
+
+  </script>
+</body>
+
+</html>
+
+</script>
+</body>
+
+</html>
